@@ -7,9 +7,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 // webpack中的所有的配置信息都应该写在module.exports中
 module.exports = {
+    mode: "development", // or "production"
     // 指定入口文件
     entry: "./src/index.ts",
-
     // 指定打包文件所在目录
     output: {
         // 指定打包文件的目录
@@ -23,6 +23,25 @@ module.exports = {
             // 不使用const,此时兼容IE 10
             const: false
         }
+    },
+
+    devtool: 'eval-source-map',
+
+    devServer: {
+        watchFiles: ['src/**/*'],
+        client: {
+            logging: 'info',
+            overlay: {
+                errors: true,
+                warnings: false,
+                runtimeErrors: true,
+            },
+            progress: true,
+            reconnect: 5
+        },
+        port: 8080,
+        open: true
+
     },
 
     // 指定webpack打包时要使用模块
@@ -64,7 +83,7 @@ module.exports = {
                     'ts-loader'
                 ],
                 // 要排除的文件
-                exclude: /node-modules/
+                exclude: /node_modules/
             },
 
             // 设置less文件的处理
