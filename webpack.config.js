@@ -13,9 +13,9 @@ module.exports = {
     // 指定打包文件所在目录
     output: {
         // 指定打包文件的目录
-        path: path.resolve(__dirname, 'dist'),
+        path: __dirname,
         // 打包后文件的文件
-        filename: "bundle.js",
+        filename: 'bundle.js',
 
         // 告诉webpack不使用箭头
         environment: {
@@ -120,10 +120,11 @@ module.exports = {
 
     // 配置Webpack插件
     plugins: [
-        new CleanWebpackPlugin(),
+        //new CleanWebpackPlugin(),
         new HTMLWebpackPlugin({
             // title: "这是一个自定义的title"
-            template: "./src/index.html"
+            template: "./src/index.html",
+            fileName: path.resolve(__dirname, 'index.html')
         }),
     ],
 
